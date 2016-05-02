@@ -5,12 +5,15 @@ import json
 # Create your views here.
 
 from django.views.decorators.csrf import csrf_exempt
+from FaceRecognizer import FaceRecognizer
 
 @csrf_exempt
 def index(request):
     if request.method == 'GET':
         print request.GET
-        return JsonResponse({'foo':'bar'})
+        fc = FaceRecognizer()
+        res = fc.getClassification()
+        return JsonResponse({'foo':res})
         #return HttpResponse("Hello face")
     else:
         print ("get post")
